@@ -1,43 +1,84 @@
-# Awesome Evolving Skills
+# /loop: The Self-Improving Meta-Skill for AI Agents
 
-A repository of autonomous, self-improving agent skills designed to enhance the capabilities of AI coding assistants. These skills use iterative loops, implicit grilling, and automatic self-modification to reliably complete tasks and learn from failures.
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)]()
+[![Standard](https://img.shields.io/badge/standard-SKILL.md-green.svg)]()
+[![Marketplace](https://img.shields.io/badge/Marketplace-LoopOps-orange.svg)]()
 
-## Features
+> **Stop rewriting prompts. Let your agent rewrite them for you.**
 
-- **Self-Improving Architecture**: Skills dynamically inject evolution hooks into other local skills, enabling the entire agentic environment to learn from mistakes and self-correct over time.
-- **Strict Definition of Done (DoD)**: Enforces robust verification before execution, minimizing hallucination and incomplete work.
-- **Micro-Improvement (Kaizen)**: Analyzes execution traces to permanently rewrite skill instructions, preventing recurring edge-case failures.
-- **Autonomous Iteration**: Loops execution through action, verification, and tracing up to a predefined limit until the DoD is met.
+`/loop` is a lightweight, zero-framework meta-skill for AI agents in modern IDEs (Cursor, Cline, Roo Code, Antigravity). It transforms your static prompts into **self-improving, autonomous workflows** using just Markdown. 
 
-## Getting Started
+No Python scripts. No heavy frameworks. Just a single `.md` file that teaches your agent how to learn from its own mistakes.
 
-To use these skills, copy the relevant skill folder (e.g., `loop/`) into your AI agent's skills directory (typically `.agents/skills/` or `skills/`).
+---
 
-> [!NOTE]
-> These skills are designed for agents that support filesystem read/write access and markdown-based instruction injection.
+## The Problem
 
-### The `/loop` Skill (The Self-Improving Orchestrator)
+In 2026, AI agents are smart, but they have amnesia:
+- **Babysitting Fatigue:** You fix an agent's hallucination today, and it repeats it tomorrow.
+- **Prompt Degradation:** You write a perfect `SKILL.md`, but as projects evolve or models update, it breaks.
+- **Infinite Loops:** Agents burn through your token budget because they lack a strict "Definition of Done".
 
-The flagship skill of this repository. It transforms standard agents into autonomous orchestrators.
+## The Solution
 
-#### Usage
+`/loop` acts as an orchestrator for your local agent. When you run `/loop [task]`, it doesn't just execute code. It runs a full **Reason -> Act -> Verify** cycle. If it fails, it analyzes the logs and **permanently rewrites** your local skill files so it never makes that mistake again.
 
-Invoke the skill by providing a task to your agent:
+### Core Magic (How it works)
 
-```text
-/loop setup a basic express server with typescript
+1. **Implicit Grilling:** `/loop` refuses to write code until it extracts a testable **Definition of Done (DoD)** from you.
+2. **Benevolent Injection:** It scans your other local skills (e.g., `react_skill.md`) and silently injects an "Evolution Hook" into them. Your entire prompt library becomes self-aware.
+3. **Iterative Execution:** It tries to meet the DoD. If tests fail, it loops back and tries again (up to a hard cap, saving your tokens).
+4. **Micro-Kaizen (Self-Mutation):** Upon completion, it analyzes the session traces. If it found a new edge case, it edits its own `.md` files to update the instructions. 
+
+---
+
+## Quick Start
+
+### Installation
+
+Drop the `/loop` skill into your local agent's directory:
+
+```bash
+mkdir -p .agents/skills/loop
+curl -o .agents/skills/loop/SKILL.md https://raw.githubusercontent.com/alimzhankhalelov/awesome-evolving-skills/main/loop/SKILL.md
 ```
 
-#### How it works
+> [!NOTE]
+> This works natively with any IDE supporting the `.agents/skills/` standard.
 
-1. **Implicit Grilling**: The agent simulates a relentless interview process to establish a strict, verifiable DoD before writing any code.
-2. **Infection (Benevolent Injection)**: It dynamically reads your local skills and injects `🧬 Evolution Hook`s into any skills required for the task.
-3. **Iteration Loop**: The agent acts, verifies against the DoD, and traces any failures to a local session trace file.
-4. **Kaizen**: If an iteration fails, it analyzes the root cause and permanently updates the relevant `SKILL.md` files (including itself) to avoid that specific error in the future.
+### Usage
+
+Open your IDE's agent chat and type:
+
+```text
+/loop Build a Postgres migration for a user table
+```
+
+Watch the magic happen:
+
+1. **Agent:** "To set a strict DoD: should I run the migration to verify it, or just generate the SQL?"
+2. **You:** "Run it on the local dev DB."
+3. **Agent:** *(Injects Evolution Hook into your db_migration skill)*.
+4. **Agent:** *(Tries to run. Fails due to missing env variables. Retries and succeeds)*.
+5. **Agent:** "Task complete. I have silently updated your `db_migration` skill to always check for `.env.local` before running migrations."
+
+## Architecture (No-Code State Machine)
+
+`/loop` utilizes Lean and TOC (Theory of Constraints) principles without requiring a backend. It uses your file system as memory:
+
+- `traces/current_session.md` — Temporary scratchpad for the current loop.
+- `SKILL.md` — The execution contract.
+- **The Evolution Hook** — A tiny prompt injected into your files that triggers the post-mortem analysis.
 
 > [!IMPORTANT]
 > The `/loop` skill requires permission to overwrite files in your workspace. Ensure your agent operates in a safe or sandboxed environment when allowing self-modifying behavior.
 
-## Available Skills
+## The LoopOps Marketplace (SaaS Vision)
 
-- [`loop/`](./loop) - The Self-Improving Orchestrator. Iteratively executes tasks, extracts DoD, and updates local skills based on trace analysis.
+Why train your agent from scratch when you can download 10,000 hours of AI experience?
+
+When a skill mutates and improves on your machine, it's valuable IP. We built the LoopOps Registry to let you share, subscribe, and monetize self-improving skills.
+
+- **Try before you buy:** Test enterprise-grade skills in our secure browser sandbox. The prompt is protected (blackboxed) to prevent IP theft.
+- **Continuous Updates:** Subscribe to `@johndoe/senior-react-skill`. As John's local agent encounters new bugs and mutates its `SKILL.md`, your local IDE gets the updates pushed automatically.
+- **Verified Evals:** Every skill on the marketplace goes through our CI/CD Gate to prove it hits >95% success rates on standard benchmarks.
