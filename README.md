@@ -142,9 +142,9 @@ graph TD
 > [!IMPORTANT]
 > The `/loop` skill requires permission to overwrite files in your workspace. Ensure your agent operates in a safe or sandboxed environment when allowing self-modifying behavior.
 
-## 🚀 The "11 out of 10" Roadmap (Coming Soon)
+## 🚀 The "11 out of 10" Architecture (Now Live)
 
-To make `/loop` an industrial standard, we are actively implementing the following robust features:
+To make `/loop` an industrial standard, we have implemented the following robust features directly into `SKILL.md` and the repository:
 
 ### 1. Safe Mutation Design (XML Tagging)
 Agents shouldn't rewrite entire instruction sets. `/loop` now injects a `<lessons_learned>` block. When the agent mutates a skill, it **only** appends rules into this specific XML container, protecting the core instructions from hallucinated deletions.
@@ -155,11 +155,14 @@ To prevent `.agents/traces/current_session.md` from causing context window bloat
 ### 3. The "Escape Hatch" (Automatic Backups)
 Before any skill file is mutated during the Kaizen phase, `/loop` automatically creates a `[skill]_backup.md` copy. Total trust, zero fear of destructive changes.
 
-### 4. Interactive Demo Environment
-*Coming soon to the repository:* A `demo/` folder containing a broken database connection project. You will be able to run `/loop fix the database connection` and watch the agent fail, trace, self-correct, and rewrite its `db_skill.md` live.
+### 4. Automated Evals (CI/CD Readiness)
+We have a native `node:test` suite (`evals/loop.test.js`) to programmatically validate key agent phases via the Gemini API, ensuring the meta-skill itself doesn't regress.
 
 ### 5. Ecosystem Schema (schema.json)
-We are developing a JSON schema for `SKILL.md` files. This will allow IDEs (or our future CLI tool) to validate skills. If a skill lacks the `<evolution_hook>`, the IDE will warn: *"Warning: This skill is static and will not learn. Run /loop to upgrade it."*
+We developed a JSON schema (`loop/schema.json`) for `SKILL.md` files. This allows IDEs (or our future CLI tool) to validate skills. If a skill lacks the `<evolution_hook>`, the IDE can warn: *"Warning: This skill is static and will not learn. Run /loop to upgrade it."*
+
+### 🚀 Up Next: Interactive Demo Environment
+*Coming soon:* A `demo/` folder containing a broken database connection project. You will be able to run `/loop fix the database connection` and watch the agent fail, trace, self-correct, and rewrite its `db_skill.md` live.
 
 ## Available Skills
 
