@@ -83,7 +83,7 @@ graph TD
         
         subgraph ExecLoop [Action & Verification]
             P3 --> Act["⚙️ Act: Write Code / Use Tools"]
-            Act --> Gatekeeper{"🛡️ /verify (Gatekeeper)"}
+            Act --> Gatekeeper{"🛡️ Internal Gatekeeper"}
             Gatekeeper -- "❌ [VERIFY: FAIL]" --> Trace["📝 Log errors to traces.md"]
             Trace --> P3
         end
@@ -112,7 +112,6 @@ graph TD
 ## Available Skills
 
 - [`loop/`](./loop) - The Self-Improving Orchestrator. Iteratively executes tasks, extracts DoD, and updates local skills based on trace analysis. Includes `contract-template.md` for Contract-Driven Development tracking.
-- [`verify/`](./verify) - The Adversarial Checker (Gatekeeper). A read-only evaluator that strictly checks if a task meets its Definition of Done. Prevents the loop from completing prematurely.
 
 
 ## The LoopOps Marketplace (SaaS Vision)

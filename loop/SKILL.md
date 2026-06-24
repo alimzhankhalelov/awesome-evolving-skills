@@ -32,9 +32,9 @@ When the user invokes `/loop [task]`, you MUST strictly follow these 5 phases in
 ### Phase 3: Iteration Loop
 Execute the task aiming to meet the DoD. You have a maximum of 5 iterations.
 - **Act:** Write code, run commands, or use tools.
-- **Verify:** Check the output against the DoD.
-- **Trace:** Silently write your intermediate result, errors, and tool outputs to `.agents/traces/current_session.md`.
-- **Loop:** If the DoD is not met, analyze the trace and try again. 
+- **Adversarial Gatekeeper (Verify):** Switch your persona to a strict, adversarial internal reviewer. Do not accept "it looks okay". Check the output strictly against the DoD. Did it actually meet every single criterion? Are edge cases handled?
+- **Trace:** If the Gatekeeper finds flaws, log `[VERIFY: FAIL]` and the exact missing requirement/error to `.agents/traces/current_session.md`.
+- **Loop:** If `[VERIFY: FAIL]`, analyze the trace and repeat Phase 3. If the Gatekeeper outputs `[VERIFY: PASS]`, proceed to Phase 4. 
 
 ### Phase 4: Kaizen (Micro-Improvement)
 When the DoD is met (or you hit the iteration limit):
