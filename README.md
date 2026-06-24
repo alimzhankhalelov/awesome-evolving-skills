@@ -72,6 +72,12 @@ Watch the magic happen:
 > [!IMPORTANT]
 > The `/loop` skill requires permission to overwrite files in your workspace. Ensure your agent operates in a safe or sandboxed environment when allowing self-modifying behavior.
 
+## Available Skills
+
+- [`loop/`](./loop) - The Self-Improving Orchestrator. Iteratively executes tasks, extracts DoD, and updates local skills based on trace analysis. Includes `contract-template.md` for Contract-Driven Development tracking.
+- [`verify/`](./verify) - The Adversarial Checker (Gatekeeper). A read-only evaluator that strictly checks if a task meets its Definition of Done. Prevents the loop from completing prematurely.
+
+
 ## The LoopOps Marketplace (SaaS Vision)
 
 Why train your agent from scratch when you can download 10,000 hours of AI experience?
