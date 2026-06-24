@@ -26,22 +26,25 @@ When the user invokes `/loop [task]`, you MUST strictly follow these 5 phases in
 ### Phase 2: Infection (Benevolent Injection)
 1. Identify which other local skills (e.g., in `.agents/skills/` or `skills/`) are needed to accomplish the task.
 2. Read those skill files. 
-3. If a needed skill DOES NOT contain the `🧬 Evolution Hook` at the bottom, append the following exact text to it:
-   `# 🧬 Evolution Hook: After using this skill, log your errors in traces.md. If a specific error caused a failed iteration, rewrite this skill file to include a rule avoiding that error.`
+3. If a needed skill DOES NOT contain the `<evolution_hook>` tag at the bottom, append the following exact text to it:
+   `<evolution_hook>After using this skill, log your errors in traces.md. If a specific error caused a failed iteration, rewrite this skill file to include a rule avoiding that error.</evolution_hook>`
+   `<lessons_learned></lessons_learned>`
 
 ### Phase 3: Iteration Loop
 Execute the task aiming to meet the DoD. You have a maximum of 5 iterations.
 - **Act:** Write code, run commands, or use tools.
 - **Adversarial Gatekeeper (Verify):** Switch your persona to a strict, adversarial internal reviewer. Do not accept "it looks okay". Check the output strictly against the DoD. Did it actually meet every single criterion? Are edge cases handled?
 - **Trace:** If the Gatekeeper finds flaws, log `[VERIFY: FAIL]` and the exact missing requirement/error to `.agents/traces/current_session.md`.
-- **Loop:** If `[VERIFY: FAIL]`, analyze the trace and repeat Phase 3. If the Gatekeeper outputs `[VERIFY: PASS]`, proceed to Phase 4. 
+- **Compaction:** If `.agents/traces/current_session.md` exceeds 50 lines, synthesize the errors into a 3-bullet-point summary, delete the old logs, and write only the summary to prevent token bloat.
+- **Loop:** If `[VERIFY: FAIL]`, analyze the trace and repeat Phase 3. If the Gatekeeper outputs `[VERIFY: PASS]`, proceed to Phase 4.
 
 ### Phase 4: Kaizen (Micro-Improvement)
 When the DoD is met (or you hit the iteration limit):
 1. Review `.agents/traces/current_session.md`.
 2. Identify the root cause of any failed iterations.
-3. SILENTLY overwrite the relevant local `SKILL.md` files (including this `loop` skill if necessary) to add specific rules or context that would prevent the failure next time.
-4. Finally, report to the user: "Task completed in [X] iterations. DoD met. I have updated `[Skill Name]` to remember how to handle [Specific Edge Case]."
+3. **Escape Hatch:** Before modifying any `[skill].md` file, create a backup copy named `[skill]_backup.md`.
+4. SILENTLY update the relevant local `SKILL.md` files (including this `loop` skill if necessary) to add specific rules or context that would prevent the failure next time. **DO NOT alter the core instructions. ONLY append your new rule inside the `<lessons_learned>` XML block at the very bottom of the file.**
+5. Finally, report to the user: "Task completed in [X] iterations. DoD met. I have updated `[Skill Name]` to remember how to handle [Specific Edge Case]."
 
 ## Examples
 

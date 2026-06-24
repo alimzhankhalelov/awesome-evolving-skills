@@ -33,17 +33,50 @@ In 2026, AI agents are smart, but they have amnesia:
 
 ## Quick Start
 
-### Installation
+### Installation by IDE/CLI
 
-Drop the `/loop` skill into your local agent's directory:
+The `/loop` skill is a pure markdown file, making it universally adaptable. Here is how to install it for the most popular agentic tools as of 2026:
 
+**1. Hermes Agent (Recommended)**
+As the #1 open-source agent for persistent memory and reusable skills, Hermes is the perfect home for `/loop`:
+```bash
+mkdir -p ~/.hermes/skills
+curl -o ~/.hermes/skills/loop.md https://raw.githubusercontent.com/alimzhankhalelov/awesome-evolving-skills/main/loop/SKILL.md
+```
+
+**2. Cursor & Kilo Code**
+For IDEs that support MDC (Markdown Cursor) rules:
+```bash
+mkdir -p .cursor/rules
+curl -o .cursor/rules/loop.mdc https://raw.githubusercontent.com/alimzhankhalelov/awesome-evolving-skills/main/loop/SKILL.md
+# For Kilo Code:
+# mkdir -p .kilo/rules && curl -o .kilo/rules/loop.md ...
+```
+
+**3. Cline & Roo Code**
+These VS Code extensions support workspace-level system prompt rules.
+```bash
+mkdir -p .cline
+curl -o .cline/loop_skill.md https://raw.githubusercontent.com/alimzhankhalelov/awesome-evolving-skills/main/loop/SKILL.md
+```
+
+**4. Claude Code & pi (CLI Agents)**
+> [!WARNING]
+> Claude Code has a built-in `/loop` command for executing commands on an interval (cronjob). To avoid conflicts, we install our meta-skill as **`/aloop`** (Agent Loop).
+
+```bash
+mkdir -p .claude/prompts
+curl -o .claude/prompts/aloop.md https://raw.githubusercontent.com/alimzhankhalelov/awesome-evolving-skills/main/loop/SKILL.md
+# Works similarly for 'pi' or 'Oh-My-Pi' in their respective prompt folders.
+```
+*Usage:* Instead of typing `/loop`, instruct the CLI: *"Run the rules in aloop.md to execute my task..."*
+
+**5. Antigravity IDE & Codex**
+For native agentic IDE environments:
 ```bash
 mkdir -p .agents/skills/loop
 curl -o .agents/skills/loop/SKILL.md https://raw.githubusercontent.com/alimzhankhalelov/awesome-evolving-skills/main/loop/SKILL.md
 ```
-
-> [!NOTE]
-> This works natively with any IDE supporting the `.agents/skills/` standard.
 
 ### Usage
 
@@ -109,9 +142,28 @@ graph TD
 > [!IMPORTANT]
 > The `/loop` skill requires permission to overwrite files in your workspace. Ensure your agent operates in a safe or sandboxed environment when allowing self-modifying behavior.
 
+## 🚀 The "11 out of 10" Roadmap (Coming Soon)
+
+To make `/loop` an industrial standard, we are actively implementing the following robust features:
+
+### 1. Safe Mutation Design (XML Tagging)
+Agents shouldn't rewrite entire instruction sets. `/loop` now injects a `<lessons_learned>` block. When the agent mutates a skill, it **only** appends rules into this specific XML container, protecting the core instructions from hallucinated deletions.
+
+### 2. Token Compaction Strategy
+To prevent `.agents/traces/current_session.md` from causing context window bloat, `/loop` includes a compaction rule: if traces exceed 50 lines, the agent synthesizes the errors into a 3-bullet-point summary, deletes the old logs, and proceeds. No more infinite token burn.
+
+### 3. The "Escape Hatch" (Automatic Backups)
+Before any skill file is mutated during the Kaizen phase, `/loop` automatically creates a `[skill]_backup.md` copy. Total trust, zero fear of destructive changes.
+
+### 4. Interactive Demo Environment
+*Coming soon to the repository:* A `demo/` folder containing a broken database connection project. You will be able to run `/loop fix the database connection` and watch the agent fail, trace, self-correct, and rewrite its `db_skill.md` live.
+
+### 5. Ecosystem Schema (schema.json)
+We are developing a JSON schema for `SKILL.md` files. This will allow IDEs (or our future CLI tool) to validate skills. If a skill lacks the `<evolution_hook>`, the IDE will warn: *"Warning: This skill is static and will not learn. Run /loop to upgrade it."*
+
 ## Available Skills
 
-- [`loop/`](./loop) - The Self-Improving Orchestrator. Iteratively executes tasks, extracts DoD, and updates local skills based on trace analysis. Includes `contract-template.md` for Contract-Driven Development tracking.
+- [`loop/`](./loop) - The Self-Improving Orchestrator. Iteratively executes tasks, extracts DoD, and updates local skills based on trace analysis.
 
 
 ## The LoopOps Marketplace (SaaS Vision)

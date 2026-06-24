@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SKILL.md Ecosystem Schema",
+  "description": "Schema for validating LoopOps-compatible skills.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the skill."
+    },
+    "description": {
+      "type": "string",
+      "description": "What the skill does and when to invoke it."
+    },
+    "has_evolution_hook": {
+      "type": "boolean",
+      "description": "Whether the skill contains the <evolution_hook> XML tag."
+    },
+    "has_lessons_learned": {
+      "type": "boolean",
+      "description": "Whether the skill contains the <lessons_learned> XML block for safe mutations."
+    }
+  },
+  "required": ["name", "description"]
+}

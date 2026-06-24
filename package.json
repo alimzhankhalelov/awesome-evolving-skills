@@ -1,0 +1,25 @@
+{
+  "name": "awesome-evolving-skills",
+  "version": "1.0.0",
+  "description": "[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/alimzhankhalelov/awesome-evolving-skills/releases) [![Standard](https://img.shields.io/badge/standard-SKILL.md-green.svg)](https://github.com/anthropics/skills/blob/main/skills/skill-creator/SKILL.md) [![Marketplace](https://img.shields.io/badge/Marketplace-LoopOps-orange.svg)](https://github.com/alimzhankhalelov/awesome-evolving-skills) > **Stop rewriting prompts. Let your agent rewrite them for you.**",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alimzhankhalelov/awesome-evolving-skills.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alimzhankhalelov/awesome-evolving-skills/issues"
+  },
+  "homepage": "https://github.com/alimzhankhalelov/awesome-evolving-skills#readme",
+  "devDependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "dotenv": "^17.4.2",
+    "jest": "^30.4.2"
+  }
+}
