@@ -1,9 +1,8 @@
 # /loop: The Self-Improving Meta-Skill for AI Agents
 
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)]()
-[![Standard](https://img.shields.io/badge/standard-SKILL.md-green.svg)]()
-[![Marketplace](https://img.shields.io/badge/Marketplace-LoopOps-orange.svg)]()
-
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/alimzhankhalelov/awesome-evolving-skills/releases)
+[![Standard](https://img.shields.io/badge/standard-SKILL.md-green.svg)](https://github.com/anthropics/skills/blob/main/skills/skill-creator/SKILL.md)
+[![Marketplace](https://img.shields.io/badge/Marketplace-LoopOps-orange.svg)](https://github.com/alimzhankhalelov/awesome-evolving-skills)
 > **Stop rewriting prompts. Let your agent rewrite them for you.**
 
 `/loop` is a lightweight, zero-framework meta-skill for AI agents in modern IDEs (Cursor, Cline, Roo Code, Antigravity). It transforms your static prompts into **self-improving, autonomous workflows** using just Markdown. 
