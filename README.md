@@ -41,14 +41,14 @@ The `/loop` skill is a pure markdown file, making it universally adaptable. Here
 As the #1 open-source agent for persistent memory and reusable skills, Hermes is the perfect home for `/loop`:
 ```bash
 mkdir -p ~/.hermes/skills
-curl -o ~/.hermes/skills/loop.md https://raw.githubusercontent.com/alimzhankhalelov/awesome-evolving-skills/main/loop/SKILL.md
+curl -o ~/.hermes/skills/loop.md https://raw.githubusercontent.com/alimzhankhalelov/awesome-evolving-skills/master/loop/SKILL.md
 ```
 
 **2. Cursor & Kilo Code**
 For IDEs that support MDC (Markdown Cursor) rules:
 ```bash
 mkdir -p .cursor/rules
-curl -o .cursor/rules/loop.mdc https://raw.githubusercontent.com/alimzhankhalelov/awesome-evolving-skills/main/loop/SKILL.md
+curl -o .cursor/rules/loop.mdc https://raw.githubusercontent.com/alimzhankhalelov/awesome-evolving-skills/master/loop/SKILL.md
 # For Kilo Code:
 # mkdir -p .kilo/rules && curl -o .kilo/rules/loop.md ...
 ```
@@ -57,7 +57,7 @@ curl -o .cursor/rules/loop.mdc https://raw.githubusercontent.com/alimzhankhalelo
 These VS Code extensions support workspace-level system prompt rules.
 ```bash
 mkdir -p .cline
-curl -o .cline/loop_skill.md https://raw.githubusercontent.com/alimzhankhalelov/awesome-evolving-skills/main/loop/SKILL.md
+curl -o .cline/loop_skill.md https://raw.githubusercontent.com/alimzhankhalelov/awesome-evolving-skills/master/loop/SKILL.md
 ```
 
 **4. Claude Code (CLI Agent)**
@@ -67,21 +67,21 @@ curl -o .cline/loop_skill.md https://raw.githubusercontent.com/alimzhankhalelov/
 Since our repository doesn't yet have a Claude Code Marketplace manifest, the most reliable installation is direct download:
 ```bash
 mkdir -p .claude/prompts
-curl -o .claude/prompts/aloop.md https://raw.githubusercontent.com/alimzhankhalelov/awesome-evolving-skills/main/loop/SKILL.md
+curl -o .claude/prompts/aloop.md https://raw.githubusercontent.com/alimzhankhalelov/awesome-evolving-skills/master/loop/SKILL.md
 ```
 *Usage:* Instead of typing `/loop`, instruct the CLI: *"Use the aloop skill to execute my task..."*
 
 **5. pi & Oh-My-Pi (CLI Agents)**
 ```bash
 mkdir -p .pi/prompts
-curl -o .pi/prompts/aloop.md https://raw.githubusercontent.com/alimzhankhalelov/awesome-evolving-skills/main/loop/SKILL.md
+curl -o .pi/prompts/aloop.md https://raw.githubusercontent.com/alimzhankhalelov/awesome-evolving-skills/master/loop/SKILL.md
 ```
 
 **6. Antigravity IDE & Codex**
 For native agentic IDE environments:
 ```bash
 mkdir -p .agents/skills/loop
-curl -o .agents/skills/loop/SKILL.md https://raw.githubusercontent.com/alimzhankhalelov/awesome-evolving-skills/main/loop/SKILL.md
+curl -o .agents/skills/loop/SKILL.md https://raw.githubusercontent.com/alimzhankhalelov/awesome-evolving-skills/master/loop/SKILL.md
 ```
 
 ### Usage
