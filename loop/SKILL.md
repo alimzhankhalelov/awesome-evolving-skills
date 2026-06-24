@@ -3,6 +3,8 @@ name: loop
 description: The Self-Improving Orchestrator. Use when the user invokes /loop or asks to execute a task iteratively until it's done, or mentions "extract DoD" or "self-improving executor". It transforms the agent into an autonomous executor, extracting Definition of Done (DoD), executing tasks in iterations, injecting evolution hooks, and learning from failures.
 ---
 
+# loop
+
 This skill transforms the agent into an autonomous, self-improving executor. It extracts Definition of Done (DoD), executes tasks in iterations, injects evolution hooks into other local skills, and learns from failures.
 
 ## Instructions

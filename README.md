@@ -60,18 +60,24 @@ mkdir -p .cline
 curl -o .cline/loop_skill.md https://raw.githubusercontent.com/alimzhankhalelov/awesome-evolving-skills/main/loop/SKILL.md
 ```
 
-**4. Claude Code & pi (CLI Agents)**
+**4. Claude Code (via Plugin Marketplace)**
 > [!WARNING]
-> Claude Code has a built-in `/loop` command for executing commands on an interval (cronjob). To avoid conflicts, we install our meta-skill as **`/aloop`** (Agent Loop).
+> Claude Code has a built-in `/loop` command for cronjobs. To avoid conflicts, you might need to use it under a different alias or simply reference it as a skill in your prompts.
 
+You can register this repository as a Claude Code Plugin marketplace natively:
 ```bash
-mkdir -p .claude/prompts
-curl -o .claude/prompts/aloop.md https://raw.githubusercontent.com/alimzhankhalelov/awesome-evolving-skills/main/loop/SKILL.md
-# Works similarly for 'pi' or 'Oh-My-Pi' in their respective prompt folders.
+/plugin marketplace add alimzhankhalelov/awesome-evolving-skills
+/plugin install loop@awesome-evolving-skills
 ```
-*Usage:* Instead of typing `/loop`, instruct the CLI: *"Run the rules in aloop.md to execute my task..."*
+*Usage:* "Use the loop skill to execute my task..."
 
-**5. Antigravity IDE & Codex**
+**5. pi & Oh-My-Pi (CLI Agents)**
+```bash
+mkdir -p .pi/prompts
+curl -o .pi/prompts/aloop.md https://raw.githubusercontent.com/alimzhankhalelov/awesome-evolving-skills/main/loop/SKILL.md
+```
+
+**6. Antigravity IDE & Codex**
 For native agentic IDE environments:
 ```bash
 mkdir -p .agents/skills/loop
