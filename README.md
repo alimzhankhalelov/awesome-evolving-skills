@@ -69,6 +69,43 @@ Watch the magic happen:
 - `SKILL.md` — The execution contract.
 - **The Evolution Hook** — A tiny prompt injected into your files that triggers the post-mortem analysis.
 
+### System Flow
+```mermaid
+graph TD
+    User(["👤 User types: /loop [task]"]) --> P0
+    
+    subgraph Engine [The /loop Meta-Skill Engine]
+        P0["🔄 Phase 0: Auto-Update"] -- "Fetches latest from GitHub" --> P1
+        P1["🕵️ Phase 1: Implicit Grilling"] -- "Interviews user to extract" --> DoD{"🎯 Definition of Done (DoD)"}
+        DoD --> P2["💉 Phase 2: Benevolent Injection"]
+        P2 -- "Injects Evolution Hook into" --> Skills[("📂 Local Skills")]
+        P2 --> P3["🔁 Phase 3: Iteration Loop"]
+        
+        subgraph ExecLoop [Action & Verification]
+            P3 --> Act["⚙️ Act: Write Code / Use Tools"]
+            Act --> Gatekeeper{"🛡️ /verify (Gatekeeper)"}
+            Gatekeeper -- "❌ [VERIFY: FAIL]" --> Trace["📝 Log errors to traces.md"]
+            Trace --> P3
+        end
+        
+        Gatekeeper -- "✅ [VERIFY: PASS]" --> P4["🧠 Phase 4: Kaizen (Micro-Improvement)"]
+        P4 -- "Rewrites local rules to avoid future bugs" --> Skills
+    end
+    
+    P4 --> Done(["🎉 Task Completed"])
+    
+    %% Styling (Dark Mode / Hacker aesthetic)
+    classDef primary fill:#2d3436,stroke:#0984e3,stroke-width:2px,color:#dfe6e9;
+    classDef gate fill:#d63031,stroke:#ff7675,stroke-width:2px,color:#fff;
+    classDef pass fill:#00b894,stroke:#55efc4,stroke-width:2px,color:#fff;
+    classDef db fill:#636e72,stroke:#b2bec3,stroke-width:2px,color:#fff;
+    
+    class P0,P1,P2,P3,P4,Act,Trace primary;
+    class Gatekeeper gate;
+    class Done,DoD pass;
+    class Skills db;
+```
+
 > [!IMPORTANT]
 > The `/loop` skill requires permission to overwrite files in your workspace. Ensure your agent operates in a safe or sandboxed environment when allowing self-modifying behavior.
 
