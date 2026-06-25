@@ -91,7 +91,7 @@ Open your IDE's agent chat and type:
 `/loop` acts as an orchestrator for your local agent, running a full **Reason -> Act -> Verify** cycle. If it fails, it analyzes the logs and permanently rewrites your local skill files.
 
 1. **Phase 0: Memory Sync:** Uses `agents.md` to track architectural decisions and maintain persistent context.
-2. **Phase 1: Spec & Plan:** Extracts a "Definition of Done" (DoD), breaks tasks into vertical slices, and explicitely maps **which skills** will be used for each slice.
+2. **Phase 1: Spec & Plan:** Establishes a "Definition of Done" (DoD) authoritatively without asking unnecessary questions, breaks tasks into vertical slices, and explicitly maps **which skills** will be used for each slice. Starts execution immediately.
 3. **Phase 2: Design Enforcement:** Creates/maintains a strict `DESIGN.md` based on premium references before UI coding begins.
 4. **Phase 3: TDD / Build Loop:** Executes iterative loops of Test-First -> Build -> Verify for each slice.
 5. **Phase 4: Human Retrospective (UAT):** Pauses to generate a Markdown UAT checklist for the user to verify (UX/UI, scenarios, DoD). Loops back to Phase 3 if rejected.
