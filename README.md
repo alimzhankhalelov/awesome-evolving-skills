@@ -88,38 +88,43 @@ Open your IDE's agent chat and type:
 
 ## How It Works
 
-`/loop` acts as an orchestrator for your local agent, running a full **Reason -> Act -> Verify** cycle. If it fails, it analyzes the logs and permanently rewrites your local skill files.
+`/loop` acts as a Sovereign Executor for your local agent, running a full **Reason -> Act -> Verify** cycle. If it fails, it analyzes the logs and rewrites your local skill files based on empirical evidence.
 
-1. **Phase 0: Memory Sync:** Uses `agents.md` to track architectural decisions and maintain persistent context.
-2. **Phase 1: Spec & Plan:** Establishes a "Definition of Done" (DoD) authoritatively without asking unnecessary questions, breaks tasks into vertical slices, and explicitly maps **which skills** will be used for each slice. Starts execution immediately.
-3. **Phase 2: Design Enforcement:** Creates/maintains a strict `DESIGN.md` based on premium references before UI coding begins.
-4. **Phase 3: TDD / Build Loop:** Executes iterative loops of Test-First -> Build -> Verify for each slice.
-5. **Phase 4: Human Retrospective (UAT):** Pauses to generate a Markdown UAT checklist for the user to verify (UX/UI, scenarios, DoD). Loops back to Phase 3 if rejected.
-6. **Phase 5: Infection (Benevolent Injection):** Silently injects an `<evolution_hook>` into any other local skills used during the task.
-7. **Phase 6: Kaizen (Micro-Improvement & Promotion):** Analyzes failures, creates backup files, and appends new rules to `<lessons_learned>` XML blocks so bugs are never repeated. If a skill evolves or a new one is created, it offers to **promote it globally**.
+1. **Phase 0: Memory Sync & Drift Control:** Uses `agents.md` to track architectural decisions, maintaining persistent context and preventing context drift. Auto-updates are strictly opt-in to prevent supply-chain attacks.
+2. **Phase 1: Spec & Plan:** Establishes a "Definition of Done" (DoD) authoritatively without asking unnecessary questions, breaks tasks into vertical slices, and explicitly maps **which skills** will be used.
+3. **Phase 1.5: Spec UAT:** Pauses for upfront plan validation to prevent costly rework. Once approved, the executor does not stop until DoD is met.
+4. **Phase 2: Design Enforcement:** Creates/maintains a strict `DESIGN.md` based on premium references before UI coding begins.
+5. **Phase 3: TDD / Build Loop:** Executes iterative loops of Test-First -> Build -> Verify for each slice. Uses an isolated **Fresh-Context Gatekeeper** to prevent confirmation bias.
+6. **Phase 4: Human Retrospective (UAT):** Pauses to generate a Markdown UAT checklist for the user to verify (UX/UI, scenarios, DoD). Loops back to Phase 3 if rejected.
+7. **Phase 5: Skill Telemetry Contract:** Abandons malware-like "infection" patterns in favor of a clean **Pull Model**. Logs standardized failure metrics that specialized skills can opt-in to parse.
+8. **Phase 6: Kaizen (Micro-Improvement):** Employs a strict **Promotion Gate (≥3 Failures)** to avoid cargo-cult rule accumulation. Appends new rules to `<lessons_learned>` XML blocks safely.
 
 ### System Flow
 ```mermaid
 graph TD
     User(["👤 User types: /loop [task]"]) --> P0
     
-    subgraph Engine [The /loop Meta-Skill Engine]
+    subgraph Engine [The /loop Sovereign Executor]
         P0["🧠 Phase 0: Memory Sync (agents.md)"] --> P1
-        P1["🕵️ Phase 1: Spec, Plan & Skill Map"] --> P2
+        P1["🕵️ Phase 1: Spec, Plan & Skill Map"] --> P1_5
+        P1_5{"⚖️ Phase 1.5: Spec UAT"}
+        P1_5 -- "❌ Reject" --> P1
+        P1_5 -- "✅ Accept" --> P2
+        
         P2["🎨 Phase 2: Design Sync (DESIGN.md)"] --> P3["🔁 Phase 3: TDD & Build Loop"]
         
         subgraph ExecLoop [Action & Verification]
             P3 --> Act["⚙️ Code & Test (@[/build], @[/test])"]
-            Act --> Gatekeeper{"🛡️ Internal Gatekeeper"}
+            Act --> Gatekeeper{"🛡️ Fresh-Context Gatekeeper"}
             Gatekeeper -- "❌ [VERIFY: FAIL]" --> Trace["📝 Trace & Fix"]
             Trace --> P3
         end
         
         Gatekeeper -- "✅ [VERIFY: PASS]" --> P4["🧑‍💻 Phase 4: Human Retrospective (UAT)"]
         P4 -- "❌ Reject" --> Trace
-        P4 -- "✅ Accept" --> P5["💉 Phase 5: Infection"]
-        P5 --> P6["🧬 Phase 6: Kaizen & Promotion"]
-        P6 -- "Appends to <lessons_learned>" --> Skills[("📂 Local Skills")]
+        P4 -- "✅ Accept" --> P5["📡 Phase 5: Telemetry Contract (Pull)"]
+        P5 --> P6["🧬 Phase 6: Kaizen & Promotion Gate"]
+        P6 -- "≥3 Failures: Mutates" --> Skills[("📂 Local Skills")]
         P6 -. "Promotes evolved skills" .-> Global[("🌐 Global Registry")]
     end
     
@@ -133,10 +138,11 @@ graph TD
 
 ## Architecture Highlights
 
-- **Safe Mutation Design:** When the agent mutates a skill, it appends rules only into a `<lessons_learned>` XML block, protecting core instructions.
-- **Token Compaction:** Traces exceeding 50 lines are synthesized into concise summaries to prevent context bloat.
-- **Automatic Backups:** Creates a `[skill]_backup.md` before any file mutation.
-- **Ecosystem Schema:** Validation schema (`loop/schema.json`) warns if skills lack an `<evolution_hook>`.
+- **Sovereign Execution:** Makes executive architectural decisions to maximize long-term ROI. Relentless execution post-spec.
+- **Supply-Chain Security:** Auto-updates are strictly opt-in. Uses version-pinned, auditable practices.
+- **Safe Mutation Design (Kaizen Gate):** Triggers evolution only after ≥3 repeating failure causes to prevent cargo-cult rule accumulation.
+- **Fresh-Context Gatekeeping:** Subagent reviewers operate in isolation to eliminate confirmation bias.
+- **Opt-In Telemetry:** Skills pull lessons from `traces.md` based on their own manifests, replacing invasive malware-like hooks.
 
 ---
 
