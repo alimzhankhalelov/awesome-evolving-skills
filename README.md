@@ -24,10 +24,11 @@ In 2026, AI agents are smart, but they have amnesia:
 
 ### Core Magic (How it works)
 
-1. **Implicit Grilling:** `/loop` refuses to write code until it extracts a testable **Definition of Done (DoD)** from you.
-2. **Benevolent Injection:** It scans your other local skills (e.g., `react_skill.md`) and silently injects an "Evolution Hook" into them. Your entire prompt library becomes self-aware.
-3. **Iterative Execution:** It tries to meet the DoD. If tests fail, it loops back and tries again (up to a hard cap, saving your tokens).
-4. **Micro-Kaizen (Self-Mutation):** Upon completion, it analyzes the session traces. If it found a new edge case, it edits its own `.md` files to update the instructions. 
+1. **Phase 0: Memory Sync:** Uses `agents.md` to track architectural decisions and maintain persistent context across sessions.
+2. **Phase 1: Spec & Plan:** Forces a rigorous interview to extract a "Definition of Done" (DoD) and breaks tasks down into vertical slices using `@[/spec]` and `@[/plan]`.
+3. **Phase 2: Design Enforcement:** Demands high-end UI references and creates/maintains `DESIGN.md` before any frontend code is written.
+4. **Phase 3: TDD / Build:** Executes iterative loops of Test-First -> Build -> Verify using `@[/build]` and `@[/test]`.
+5. **Phase 4: Micro-Kaizen (Self-Mutation):** Analyzes failures and appends new rules to its own `<lessons_learned>` XML blocks so bugs are never repeated.
 
 ---
 
@@ -114,21 +115,19 @@ graph TD
     User(["👤 User types: /loop [task]"]) --> P0
     
     subgraph Engine [The /loop Meta-Skill Engine]
-        P0["🔄 Phase 0: Auto-Update"] -- "Fetches latest from GitHub" --> P1
-        P1["🕵️ Phase 1: Implicit Grilling"] -- "Interviews user to extract" --> DoD{"🎯 Definition of Done (DoD)"}
-        DoD --> P2["💉 Phase 2: Benevolent Injection"]
-        P2 -- "Injects Evolution Hook into" --> Skills[("📂 Local Skills")]
-        P2 --> P3["🔁 Phase 3: Iteration Loop"]
+        P0["🧠 Phase 0: Memory Sync (agents.md)"] --> P1
+        P1["🕵️ Phase 1: Spec & Plan (DoD & Slices)"] --> P2
+        P2["🎨 Phase 2: Design Sync (DESIGN.md)"] --> P3["🔁 Phase 3: TDD & Build Loop"]
         
         subgraph ExecLoop [Action & Verification]
-            P3 --> Act["⚙️ Act: Write Code / Use Tools"]
+            P3 --> Act["⚙️ Code & Test (@[/build], @[/test])"]
             Act --> Gatekeeper{"🛡️ Internal Gatekeeper"}
-            Gatekeeper -- "❌ [VERIFY: FAIL]" --> Trace["📝 Log errors to traces.md"]
+            Gatekeeper -- "❌ [VERIFY: FAIL]" --> Trace["📝 Trace & Fix"]
             Trace --> P3
         end
         
-        Gatekeeper -- "✅ [VERIFY: PASS]" --> P4["🧠 Phase 4: Kaizen (Micro-Improvement)"]
-        P4 -- "Rewrites local rules to avoid future bugs" --> Skills
+        Gatekeeper -- "✅ [VERIFY: PASS]" --> P4["🧬 Phase 4: Kaizen (Evolution)"]
+        P4 -- "Appends to <lessons_learned>" --> Skills[("📂 Local Skills")]
     end
     
     P4 --> Done(["🎉 Task Completed"])
