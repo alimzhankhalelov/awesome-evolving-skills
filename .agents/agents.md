@@ -11,6 +11,7 @@
   - **Escape Hatch:** Implemented `[skill]_backup.md` creation before applying mutations.
   - **Ecosystem:** Added `schema.json` and installation guides for top 2026 CLI/IDE agents (Hermes, Cursor, Kilo Code, Cline, Roo Code, Claude Code).
 - **Automated Evals:** Created `package.json` and `evals/loop.test.js` using `node:test` to validate Phase 1 (grilling) and Phase 4 (mutation) via the Gemini API, laying the groundwork for CI/CD integration.
+  - **Auto-Update Fix:** Added `-sf` flag to the initial curl fetch in `SKILL.md` to prevent overwriting the local skill with a 404 response page.
 
 ## Future Plans
 - Develop more self-improving skills within this open-source repository.
