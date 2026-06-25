@@ -36,8 +36,17 @@ Execute the plan using vertical slices. For each slice, you have a maximum of 5 
 
 ### Phase 4: Human Retrospective (UAT)
 Before finalizing the loop, pause and present the result to the user.
-1. Ask: *"Here is the completed slice/feature. Is this exactly what you wanted? Please provide feedback."*
-2. If the user points out flaws, issues, or aesthetic problems, trace the failure, loop back to **Phase 3**, and fix it based on the feedback.
+1. Generate a Markdown UAT Checklist for the user, covering critical aspects of the task. Example:
+   ```markdown
+   ### User Acceptance Testing (UAT) Checklist
+   - [ ] UX/UI matches the high-end premium aesthetic (`DESIGN.md`).
+   - [ ] All primary scenarios and edge cases work correctly.
+   - [ ] Design consistency is maintained across all states (hover, focus, loading, error).
+   - [ ] Responsiveness (mobile, tablet, desktop) is verified.
+   - [ ] Definition of Done (DoD) from Phase 1 is fully met.
+   ```
+2. Ask the user: *"Please review the completed slice/feature. Check the boxes above if they pass, or tell me what needs fixing."*
+3. If the user points out flaws, issues, or aesthetic problems (or does not check all boxes), trace the failure, loop back to **Phase 3**, and fix it based on the feedback. Do NOT proceed to Phase 5 until the user completes the checklist or explicitly approves.
 
 ### Phase 5: Infection (Benevolent Injection)
 1. Identify which other local skills were used.

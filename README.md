@@ -94,7 +94,7 @@ Open your IDE's agent chat and type:
 2. **Phase 1: Spec & Plan:** Extracts a "Definition of Done" (DoD), breaks tasks into vertical slices, and explicitely maps **which skills** will be used for each slice.
 3. **Phase 2: Design Enforcement:** Creates/maintains a strict `DESIGN.md` based on premium references before UI coding begins.
 4. **Phase 3: TDD / Build Loop:** Executes iterative loops of Test-First -> Build -> Verify for each slice.
-5. **Phase 4: Human Retrospective (UAT):** Pauses to ask the user for feedback and verification. Loops back to Phase 3 if rejected.
+5. **Phase 4: Human Retrospective (UAT):** Pauses to generate a Markdown UAT checklist for the user to verify (UX/UI, scenarios, DoD). Loops back to Phase 3 if rejected.
 6. **Phase 5: Infection (Benevolent Injection):** Silently injects an `<evolution_hook>` into any other local skills used during the task.
 7. **Phase 6: Kaizen (Micro-Improvement & Promotion):** Analyzes failures, creates backup files, and appends new rules to `<lessons_learned>` XML blocks so bugs are never repeated. If a skill evolves or a new one is created, it offers to **promote it globally**.
 
