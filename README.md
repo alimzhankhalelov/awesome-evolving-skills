@@ -3,87 +3,78 @@
 [![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/alimzhankhalelov/awesome-evolving-skills/releases)
 [![Standard](https://img.shields.io/badge/standard-SKILL.md-green.svg)](https://github.com/anthropics/skills/blob/main/skills/skill-creator/SKILL.md)
 [![Marketplace](https://img.shields.io/badge/Marketplace-LoopOps-orange.svg)](https://github.com/alimzhankhalelov/awesome-evolving-skills)
+
 > **Stop rewriting prompts. Let your agent rewrite them for you.**
 
-`/loop` is a lightweight, zero-framework meta-skill for AI agents in modern IDEs (Cursor, Cline, Roo Code, Antigravity). It transforms your static prompts into **self-improving, autonomous workflows** using just Markdown. 
-
-No Python scripts. No heavy frameworks. Just a single `.md` file that teaches your agent how to learn from its own mistakes.
-
----
-
-## The Problem
-
-In 2026, AI agents are smart, but they have amnesia:
-- **Babysitting Fatigue:** You fix an agent's hallucination today, and it repeats it tomorrow.
-- **Prompt Degradation:** You write a perfect `SKILL.md`, but as projects evolve or models update, it breaks.
-- **Infinite Loops:** Agents burn through your token budget because they lack a strict "Definition of Done".
-
-## The Solution
-
-`/loop` acts as an orchestrator for your local agent. When you run `/loop [task]`, it doesn't just execute code. It runs a full **Reason -> Act -> Verify** cycle. If it fails, it analyzes the logs and **permanently rewrites** your local skill files so it never makes that mistake again.
-
-### Core Magic (How it works)
-
-1. **Phase 0: Memory Sync:** Uses `agents.md` to track architectural decisions and maintain persistent context across sessions.
-2. **Phase 1: Spec & Plan:** Forces a rigorous interview to extract a "Definition of Done" (DoD) and breaks tasks down into vertical slices using `@[/spec]` and `@[/plan]`.
-3. **Phase 2: Design Enforcement:** Demands high-end UI references and creates/maintains `DESIGN.md` before any frontend code is written.
-4. **Phase 3: TDD / Build:** Executes iterative loops of Test-First -> Build -> Verify using `@[/build]` and `@[/test]`.
-5. **Phase 4: Micro-Kaizen (Self-Mutation):** Analyzes failures and appends new rules to its own `<lessons_learned>` XML blocks so bugs are never repeated.
+`/loop` is a lightweight, zero-framework meta-skill for AI agents in modern IDEs. It transforms your static prompts into self-improving, autonomous workflows using just Markdown. No Python scripts, no heavy frameworks—just a single `.md` file that teaches your agent how to learn from its own mistakes.
 
 ---
 
 ## Quick Start
 
-### Installation by IDE/CLI
+### Installation
 
-The `/loop` skill is a pure markdown file, making it universally adaptable. Here is how to install it for the most popular agentic tools as of 2026:
+The `/loop` skill is a pure markdown file, making it universally adaptable.
 
-**1. Hermes Agent (Recommended)**
-As the #1 open-source agent for persistent memory and reusable skills, Hermes is the perfect home for `/loop`:
+<details>
+<summary><strong>1. Hermes Agent</strong></summary>
+
 ```bash
 mkdir -p ~/.hermes/skills
 curl -o ~/.hermes/skills/loop.md https://raw.githubusercontent.com/alimzhankhalelov/awesome-evolving-skills/master/loop/SKILL.md
 ```
+</details>
 
-**2. Cursor & Kilo Code**
-For IDEs that support MDC (Markdown Cursor) rules:
+<details>
+<summary><strong>2. Cursor & Kilo Code</strong></summary>
+
 ```bash
 mkdir -p .cursor/rules
 curl -o .cursor/rules/loop.mdc https://raw.githubusercontent.com/alimzhankhalelov/awesome-evolving-skills/master/loop/SKILL.md
 # For Kilo Code:
 # mkdir -p .kilo/rules && curl -o .kilo/rules/loop.md ...
 ```
+</details>
 
-**3. Cline & Roo Code**
-These VS Code extensions support workspace-level system prompt rules.
+<details>
+<summary><strong>3. Cline & Roo Code</strong></summary>
+
 ```bash
 mkdir -p .cline
 curl -o .cline/loop_skill.md https://raw.githubusercontent.com/alimzhankhalelov/awesome-evolving-skills/master/loop/SKILL.md
 ```
+</details>
 
-**4. Claude Code (CLI Agent)**
+<details>
+<summary><strong>4. Claude Code (CLI Agent)</strong></summary>
+
 > [!WARNING]
-> Claude Code has a built-in `/loop` command for cronjobs. To avoid conflicts, we install our meta-skill as **`/aloop`** (Agent Loop).
+> Claude Code has a built-in `/loop` command. To avoid conflicts, install as **`/aloop`**.
 
-Since our repository doesn't yet have a Claude Code Marketplace manifest, the most reliable installation is direct download:
 ```bash
 mkdir -p .claude/prompts
 curl -o .claude/prompts/aloop.md https://raw.githubusercontent.com/alimzhankhalelov/awesome-evolving-skills/master/loop/SKILL.md
 ```
-*Usage:* Instead of typing `/loop`, instruct the CLI: *"Use the aloop skill to execute my task..."*
+*Usage:* Instead of `/loop`, instruct the CLI: *"Use the aloop skill to execute my task..."*
+</details>
 
-**5. pi & Oh-My-Pi (CLI Agents)**
+<details>
+<summary><strong>5. pi & Oh-My-Pi (CLI Agents)</strong></summary>
+
 ```bash
 mkdir -p .pi/prompts
 curl -o .pi/prompts/aloop.md https://raw.githubusercontent.com/alimzhankhalelov/awesome-evolving-skills/master/loop/SKILL.md
 ```
+</details>
 
-**6. Antigravity IDE & Codex**
-For native agentic IDE environments:
+<details>
+<summary><strong>6. Antigravity IDE & Codex</strong></summary>
+
 ```bash
 mkdir -p .agents/skills/loop
 curl -o .agents/skills/loop/SKILL.md https://raw.githubusercontent.com/alimzhankhalelov/awesome-evolving-skills/master/loop/SKILL.md
 ```
+</details>
 
 ### Usage
 
@@ -93,21 +84,17 @@ Open your IDE's agent chat and type:
 /loop Build a Postgres migration for a user table
 ```
 
-Watch the magic happen:
+---
 
-1. **Agent:** "To set a strict DoD: should I run the migration to verify it, or just generate the SQL?"
-2. **You:** "Run it on the local dev DB."
-3. **Agent:** *(Injects Evolution Hook into your db_migration skill)*.
-4. **Agent:** *(Tries to run. Fails due to missing env variables. Retries and succeeds)*.
-5. **Agent:** "Task complete. I have silently updated your `db_migration` skill to always check for `.env.local` before running migrations."
+## How It Works
 
-## Architecture (No-Code State Machine)
+`/loop` acts as an orchestrator for your local agent, running a full **Reason -> Act -> Verify** cycle. If it fails, it analyzes the logs and permanently rewrites your local skill files.
 
-`/loop` utilizes Lean and TOC (Theory of Constraints) principles without requiring a backend. It uses your file system as memory:
-
-- `traces/current_session.md` — Temporary scratchpad for the current loop.
-- `SKILL.md` — The execution contract.
-- **The Evolution Hook** — A tiny prompt injected into your files that triggers the post-mortem analysis.
+1. **Phase 0: Memory Sync:** Uses `agents.md` to track architectural decisions and maintain persistent context across sessions.
+2. **Phase 1: Spec & Plan:** Forces a rigorous interview to extract a "Definition of Done" (DoD) and breaks tasks down into vertical slices using `@[/spec]` and `@[/plan]`.
+3. **Phase 2: Design Enforcement:** Demands high-end UI references and creates/maintains `DESIGN.md` before any frontend code is written.
+4. **Phase 3: TDD / Build:** Executes iterative loops of Test-First -> Build -> Verify using `@[/build]` and `@[/test]`.
+5. **Phase 4: Micro-Kaizen (Self-Mutation):** Analyzes failures and appends new rules to its own `<lessons_learned>` XML blocks so bugs are never repeated.
 
 ### System Flow
 ```mermaid
@@ -131,55 +118,26 @@ graph TD
     end
     
     P4 --> Done(["🎉 Task Completed"])
-    
-    %% Styling (Dark Mode / Hacker aesthetic)
-    classDef primary fill:#2d3436,stroke:#0984e3,stroke-width:2px,color:#dfe6e9;
-    classDef gate fill:#d63031,stroke:#ff7675,stroke-width:2px,color:#fff;
-    classDef pass fill:#00b894,stroke:#55efc4,stroke-width:2px,color:#fff;
-    classDef db fill:#636e72,stroke:#b2bec3,stroke-width:2px,color:#fff;
-    
-    class P0,P1,P2,P3,P4,Act,Trace primary;
-    class Gatekeeper gate;
-    class Done,DoD pass;
-    class Skills db;
 ```
 
 > [!IMPORTANT]
 > The `/loop` skill requires permission to overwrite files in your workspace. Ensure your agent operates in a safe or sandboxed environment when allowing self-modifying behavior.
 
-## 🚀 The "11 out of 10" Architecture (Now Live)
+---
 
-To make `/loop` an industrial standard, we have implemented the following robust features directly into `SKILL.md` and the repository:
+## Architecture Highlights
 
-### 1. Safe Mutation Design (XML Tagging)
-Agents shouldn't rewrite entire instruction sets. `/loop` now injects a `<lessons_learned>` block. When the agent mutates a skill, it **only** appends rules into this specific XML container, protecting the core instructions from hallucinated deletions.
+- **Safe Mutation Design:** When the agent mutates a skill, it appends rules only into a `<lessons_learned>` XML block, protecting core instructions.
+- **Token Compaction:** Traces exceeding 50 lines are synthesized into concise summaries to prevent context bloat.
+- **Automatic Backups:** Creates a `[skill]_backup.md` before any file mutation.
+- **Ecosystem Schema:** Validation schema (`loop/schema.json`) warns if skills lack an `<evolution_hook>`.
 
-### 2. Token Compaction Strategy
-To prevent `.agents/traces/current_session.md` from causing context window bloat, `/loop` includes a compaction rule: if traces exceed 50 lines, the agent synthesizes the errors into a 3-bullet-point summary, deletes the old logs, and proceeds. No more infinite token burn.
+---
 
-### 3. The "Escape Hatch" (Automatic Backups)
-Before any skill file is mutated during the Kaizen phase, `/loop` automatically creates a `[skill]_backup.md` copy. Total trust, zero fear of destructive changes.
+## LoopOps Marketplace
 
-### 4. Automated Evals (CI/CD Readiness)
-We have a native `node:test` suite (`evals/loop.test.js`) to programmatically validate key agent phases via the Gemini API, ensuring the meta-skill itself doesn't regress.
+The LoopOps Registry allows sharing, subscribing, and monetizing self-improving skills.
 
-### 5. Ecosystem Schema (schema.json)
-We developed a JSON schema (`loop/schema.json`) for `SKILL.md` files. This allows IDEs (or our future CLI tool) to validate skills. If a skill lacks the `<evolution_hook>`, the IDE can warn: *"Warning: This skill is static and will not learn. Run /loop to upgrade it."*
-
-### 🚀 Up Next: Interactive Demo Environment
-*Coming soon:* A `demo/` folder containing a broken database connection project. You will be able to run `/loop fix the database connection` and watch the agent fail, trace, self-correct, and rewrite its `db_skill.md` live.
-
-## Available Skills
-
-- [`loop/`](./loop) - The Self-Improving Orchestrator. Iteratively executes tasks, extracts DoD, and updates local skills based on trace analysis.
-
-
-## The LoopOps Marketplace (SaaS Vision)
-
-Why train your agent from scratch when you can download 10,000 hours of AI experience?
-
-When a skill mutates and improves on your machine, it's valuable IP. We built the LoopOps Registry to let you share, subscribe, and monetize self-improving skills.
-
-- **Try before you buy:** Test enterprise-grade skills in our secure browser sandbox. The prompt is protected (blackboxed) to prevent IP theft.
-- **Continuous Updates:** Subscribe to `@johndoe/senior-react-skill`. As John's local agent encounters new bugs and mutates its `SKILL.md`, your local IDE gets the updates pushed automatically.
-- **Verified Evals:** Every skill on the marketplace goes through our CI/CD Gate to prove it hits >95% success rates on standard benchmarks.
+- **Browser Sandbox:** Test enterprise-grade skills securely.
+- **Continuous Updates:** Subscribe to skills to receive mutations automatically as they improve.
+- **Verified Evals:** Skills pass CI/CD gates to ensure high success rates on benchmarks.
