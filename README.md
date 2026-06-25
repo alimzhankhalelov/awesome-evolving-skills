@@ -90,11 +90,13 @@ Open your IDE's agent chat and type:
 
 `/loop` acts as an orchestrator for your local agent, running a full **Reason -> Act -> Verify** cycle. If it fails, it analyzes the logs and permanently rewrites your local skill files.
 
-1. **Phase 0: Memory Sync:** Uses `agents.md` to track architectural decisions and maintain persistent context across sessions.
-2. **Phase 1: Spec & Plan:** Forces a rigorous interview to extract a "Definition of Done" (DoD) and breaks tasks down into vertical slices using `@[/spec]` and `@[/plan]`.
-3. **Phase 2: Design Enforcement:** Demands high-end UI references and creates/maintains `DESIGN.md` before any frontend code is written.
-4. **Phase 3: TDD / Build:** Executes iterative loops of Test-First -> Build -> Verify using `@[/build]` and `@[/test]`.
-5. **Phase 4: Micro-Kaizen (Self-Mutation):** Analyzes failures and appends new rules to its own `<lessons_learned>` XML blocks so bugs are never repeated.
+1. **Phase 0: Memory Sync:** Uses `agents.md` to track architectural decisions and maintain persistent context.
+2. **Phase 1: Spec & Plan:** Extracts a "Definition of Done" (DoD), breaks tasks into vertical slices, and explicitely maps **which skills** will be used for each slice.
+3. **Phase 2: Design Enforcement:** Creates/maintains a strict `DESIGN.md` based on premium references before UI coding begins.
+4. **Phase 3: TDD / Build Loop:** Executes iterative loops of Test-First -> Build -> Verify for each slice.
+5. **Phase 4: Human Retrospective (UAT):** Pauses to ask the user for feedback and verification. Loops back to Phase 3 if rejected.
+6. **Phase 5: Infection (Benevolent Injection):** Silently injects an `<evolution_hook>` into any other local skills used during the task.
+7. **Phase 6: Kaizen (Micro-Improvement & Promotion):** Analyzes failures, creates backup files, and appends new rules to `<lessons_learned>` XML blocks so bugs are never repeated. If a skill evolves or a new one is created, it offers to **promote it globally**.
 
 ### System Flow
 ```mermaid
@@ -103,7 +105,7 @@ graph TD
     
     subgraph Engine [The /loop Meta-Skill Engine]
         P0["🧠 Phase 0: Memory Sync (agents.md)"] --> P1
-        P1["🕵️ Phase 1: Spec & Plan (DoD & Slices)"] --> P2
+        P1["🕵️ Phase 1: Spec, Plan & Skill Map"] --> P2
         P2["🎨 Phase 2: Design Sync (DESIGN.md)"] --> P3["🔁 Phase 3: TDD & Build Loop"]
         
         subgraph ExecLoop [Action & Verification]
@@ -113,11 +115,15 @@ graph TD
             Trace --> P3
         end
         
-        Gatekeeper -- "✅ [VERIFY: PASS]" --> P4["🧬 Phase 4: Kaizen (Evolution)"]
-        P4 -- "Appends to <lessons_learned>" --> Skills[("📂 Local Skills")]
+        Gatekeeper -- "✅ [VERIFY: PASS]" --> P4["🧑‍💻 Phase 4: Human Retrospective (UAT)"]
+        P4 -- "❌ Reject" --> Trace
+        P4 -- "✅ Accept" --> P5["💉 Phase 5: Infection"]
+        P5 --> P6["🧬 Phase 6: Kaizen & Promotion"]
+        P6 -- "Appends to <lessons_learned>" --> Skills[("📂 Local Skills")]
+        P6 -. "Promotes evolved skills" .-> Global[("🌐 Global Registry")]
     end
     
-    P4 --> Done(["🎉 Task Completed"])
+    P6 --> Done(["🎉 Task Completed"])
 ```
 
 > [!IMPORTANT]
