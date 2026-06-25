@@ -139,6 +139,7 @@ graph TD
 ## Architecture Highlights
 
 - **Sovereign Execution:** Makes executive architectural decisions to maximize long-term ROI. Relentless execution post-spec.
+- **End-to-End Accountability:** Closes the loop via observability. Tasks are only "done" when validated in the target environment (e.g., Vercel logs, browser consoles), not just locally.
 - **Supply-Chain Security:** Auto-updates are strictly opt-in. Uses version-pinned, auditable practices.
 - **Safe Mutation Design (Kaizen Gate):** Triggers evolution only after ≥3 repeating failure causes to prevent cargo-cult rule accumulation.
 - **Fresh-Context Gatekeeping:** Subagent reviewers operate in isolation to eliminate confirmation bias.

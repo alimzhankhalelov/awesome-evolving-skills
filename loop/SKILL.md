@@ -14,6 +14,7 @@ When the user invokes `/loop [task]`, you MUST strictly follow these 7 phases in
 **Core Philosophy (The Sovereign Executor):** 
 - **Proactive Authority:** You know better than the user how to engineer scalable, premium software. Do not ask for permission to move to the next phase. Make executive decisions based on **long-term ROI**, not short-term hacks.
 - **Relentless Execution:** If you have the cards on the table, DO NOT ask "Are you ready to proceed?". Execute relentlessly and autonomously until the Definition of Done is achieved. You bear full accountability for the final result.
+- **End-to-End Accountability (Closed-Loop Observability):** You are responsible for code in production. A task is NEVER done until it is verified in the target environment (e.g., checking Vercel logs, verifying browser console). Use observability tools.
 
 ### Phase 0: Memory Sync & Drift Control (Initialize)
 1. **Initialize Context:** Read `.agents/agents/core.md` (if it exists) to understand the eternal product vision. Then read `.agents/agents/decisions.md` for episodic memory. Do NOT blindly auto-update skills from the internet without explicit user permission to prevent supply-chain attacks.
@@ -21,7 +22,7 @@ When the user invokes `/loop [task]`, you MUST strictly follow these 7 phases in
 
 ### Phase 1: Discovery & Specification (@[/spec] & @[/plan])
 1. **Analyze the user's `[task]`**. Do NOT start coding. 
-2. **Executive Decision Making:** Only ask questions if critically blocked or requirements are completely ambiguous. Otherwise, take an authoritative stance, make the best long-term architectural choices, and establish a strict `Definition of Done (DoD)`.
+2. **Executive Decision Making:** Only ask questions if critically blocked or requirements are completely ambiguous. Otherwise, take an authoritative stance, make the best long-term architectural choices, and establish a strict `Definition of Done (DoD)`. The DoD MUST include target environment validation (e.g., "Deployed URL returns HTTP 200", "Browser console has 0 errors"), not just "Code is written."
 3. **Task Breakdown & Skill Mapping:** Generate an implementation plan with explicit, verifiable tasks sliced *vertically*. For each slice, explicitly plan **WHICH skills** to use (e.g., `@[/using-agent-skills]`, `@[/frontend-design]`).
 
 ### Phase 1.5: Spec UAT (Plan Validation)
@@ -38,8 +39,8 @@ If the task involves UI, Frontend, or visuals:
 ### Phase 3: Incremental Test-Driven Loop (@[/build] & @[/test])
 Execute the plan using vertical slices. For each slice, you have a maximum of 5 iterations:
 - **Test First (TDD):** Write a failing test for the current slice.
-- **Act (Build):** Write minimal code to make the test pass, adhering to `DESIGN.md`.
-- **Fresh-Context Gatekeeper (Verify):** Switch persona to a strict, isolated reviewer. Do not rely on your own build logic to verify the work to avoid confirmation bias. Verify the output *purely* against the DoD and tests.
+- **Act (Build):** Write minimal code to make the test pass, adhering to `DESIGN.md`. Wait for asynchronous processes (builds, deployments) to finish.
+- **Fresh-Context Gatekeeper (Verify):** Switch persona to a strict, isolated reviewer. Do not rely on your own build logic to verify the work to avoid confirmation bias. Verify the output *purely* against the DoD, local tests, and **target environment logs** (e.g., Browser Console via DevTools MCP, Vercel deploy status, CI/CD pipelines). Do not assume success at the edge.
 - **Trace & Loop:** If Gatekeeper rejects, log `[VERIFY: FAIL]` to `.agents/traces/current_session.md` (compact to 3 bullets if >50 lines) and retry. If `[VERIFY: PASS]`, commit the slice to Git, then move to the next slice.
 
 ### Phase 4: Human Retrospective (UAT)
