@@ -48,11 +48,11 @@ Before finalizing the loop, pause and present the result to the user.
 1. Generate a Markdown UAT Checklist for the user, covering critical aspects of the task. Example:
    ```markdown
    ### User Acceptance Testing (UAT) Checklist
-   - [ ] UX/UI matches the high-end premium aesthetic (`DESIGN.md`).
-   - [ ] All primary scenarios and edge cases work correctly.
-   - [ ] Design consistency is maintained across all states (hover, focus, loading, error).
-   - [ ] Responsiveness (mobile, tablet, desktop) is verified.
-   - [ ] Definition of Done (DoD) from Phase 1 is fully met.
+   - [ ] **Visuals & Vibe:** Does the design look expensive, polished, and match our core brand style?
+   - [ ] **Core Action:** Can a normal user complete the main goal without getting stuck or confused?
+   - [ ] **Interactive Details:** Do buttons and links feel alive when you hover or click them? Is it clear when something is loading or broken?
+   - [ ] **Device Check:** Open it on your phone and laptop. Does it look great and work perfectly on both?
+   - [ ] **Promise Kept:** Did we actually solve the problem we agreed to fix at the start?
    ```
 2. Ask the user: *"Please review the completed slice/feature. Check the boxes above if they pass, or tell me what needs fixing."*
 3. If the user points out flaws, issues, or aesthetic problems (or does not check all boxes), trace the failure, loop back to **Phase 3**, and fix it based on the feedback. Do NOT proceed to Phase 5 until the user completes the checklist or explicitly approves.
