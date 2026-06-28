@@ -37,11 +37,13 @@ If the task involves UI, Frontend, or visuals:
 3. For the rest of the execution, every UI component must strictly adhere to `DESIGN.md`.
 
 ### Phase 3: Incremental Test-Driven Loop (@[/build] & @[/test])
-Execute the plan using vertical slices. For each slice, you have a maximum of 5 iterations:
+Execute the plan using vertical slices (a vertical slice is a fully functional, end-to-end piece of a feature, e.g., "Login Flow", not a horizontal layer like "just the DB").
+**CRITICAL RULE:** Do NOT pause to ask the user for permission between slices. You must execute all slices sequentially and seamlessly.
+For each slice, you have a maximum of 5 iterations:
 - **Test First (TDD):** Write a failing test for the current slice.
 - **Act (Build):** Write minimal code to make the test pass, adhering to `DESIGN.md`. Wait for asynchronous processes (builds, deployments) to finish.
 - **Fresh-Context Gatekeeper (Verify):** Switch persona to a strict, isolated reviewer. Do not rely on your own build logic to verify the work to avoid confirmation bias. Verify the output *purely* against the DoD, local tests, and **target environment logs** (e.g., Browser Console via DevTools MCP, Vercel deploy status, CI/CD pipelines). Do not assume success at the edge.
-- **Trace & Loop:** If Gatekeeper rejects, log `[VERIFY: FAIL]` to `.agents/traces/current_session.md` (compact to 3 bullets if >50 lines) and retry. If `[VERIFY: PASS]`, commit the slice to Git, then move to the next slice.
+- **Trace & Loop:** If Gatekeeper rejects, log `[VERIFY: FAIL]` to `.agents/traces/current_session.md` (compact to 3 bullets if >50 lines) and retry. If `[VERIFY: PASS]`, commit the slice to Git, then **immediately** move to the next slice without asking the user.
 
 ### Phase 4: Human Retrospective (UAT)
 Before finalizing the loop, pause and present the result to the user.
