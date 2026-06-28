@@ -22,8 +22,9 @@ When the user invokes `/loop [task]`, you MUST strictly follow these 7 phases in
 
 ### Phase 1: Discovery & Specification (@[/spec] & @[/plan])
 1. **Analyze the user's `[task]`**. Do NOT start coding. 
-2. **Executive Decision Making:** Only ask questions if critically blocked or requirements are completely ambiguous. Otherwise, take an authoritative stance, make the best long-term architectural choices, and establish a strict `Definition of Done (DoD)`. The DoD MUST include target environment validation (e.g., "Deployed URL returns HTTP 200", "Browser console has 0 errors"), not just "Code is written."
-3. **Task Breakdown & Skill Mapping:** Generate an implementation plan with explicit, verifiable tasks sliced *vertically*. For each slice, explicitly plan **WHICH skills** to use (e.g., `@[/using-agent-skills]`, `@[/frontend-design]`).
+2. **Customer Journey Mapping (CJM):** Before writing any specifications, explicitly define the User Flow. Describe exactly what the user sees, which buttons they click, what states change, and where they navigate. This CJM acts as the foundation for all subsequent testing.
+3. **Executive Decision Making:** Only ask questions if critically blocked or requirements are completely ambiguous. Otherwise, take an authoritative stance, make the best long-term architectural choices, and establish a strict `Definition of Done (DoD)`. The DoD MUST include target environment validation (e.g., "Deployed URL returns HTTP 200", "Browser console has 0 errors"), not just "Code is written."
+4. **Task Breakdown & Skill Mapping:** Generate an implementation plan with explicit, verifiable tasks sliced *vertically* based on the CJM. For each slice, explicitly plan **WHICH skills** to use (e.g., `@[/using-agent-skills]`, `@[/frontend-design]`).
 
 ### Phase 1.5: Spec UAT (Plan Validation)
 1. **Validation Checkpoint:** Present the DoD, architectural choices, and the vertical slices to the user.
@@ -40,9 +41,9 @@ If the task involves UI, Frontend, or visuals:
 Execute the plan using vertical slices (a vertical slice is a fully functional, end-to-end piece of a feature, e.g., "Login Flow", not a horizontal layer like "just the DB").
 **CRITICAL RULE:** Do NOT pause to ask the user for permission between slices. You must execute all slices sequentially and seamlessly.
 For each slice, you have a maximum of 5 iterations:
-- **Test First (TDD):** Write a failing test for the current slice.
+- **Test First (TDD):** Write failing tests that explicitly cover the Customer Journey Map (CJM) steps for the current slice.
 - **Act (Build):** Write minimal code to make the test pass, adhering to `DESIGN.md`. Wait for asynchronous processes (builds, deployments) to finish.
-- **Fresh-Context Gatekeeper (Verify):** Switch persona to a strict, isolated reviewer. Do not rely on your own build logic to verify the work to avoid confirmation bias. Verify the output *purely* against the DoD, local tests, and **target environment logs** (e.g., Browser Console via DevTools MCP, Vercel deploy status, CI/CD pipelines). Do not assume success at the edge.
+- **Fresh-Context Gatekeeper (Verify):** Switch persona to a strict, isolated reviewer. Do not rely on your own build logic to verify the work to avoid confirmation bias. Verify the output *purely* against the DoD, CJM User Flows, local tests, and **target environment logs** (e.g., Browser Console via DevTools MCP, Vercel deploy status, CI/CD pipelines). Do not assume success at the edge.
 - **Trace & Loop:** If Gatekeeper rejects, log `[VERIFY: FAIL]` to `.agents/traces/current_session.md` (compact to 3 bullets if >50 lines) and retry. If `[VERIFY: PASS]`, commit the slice to Git, then **immediately** move to the next slice without asking the user.
 
 ### Phase 4: Human Retrospective (UAT)

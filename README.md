@@ -91,10 +91,10 @@ Open your IDE's agent chat and type:
 `/loop` acts as a Sovereign Executor for your local agent, running a full **Reason -> Act -> Verify** cycle. If it fails, it analyzes the logs and rewrites your local skill files based on empirical evidence.
 
 1. **Phase 0: Memory Sync & Drift Control:** Uses `agents.md` to track architectural decisions, maintaining persistent context and preventing context drift. Auto-updates are strictly opt-in to prevent supply-chain attacks.
-2. **Phase 1: Spec & Plan:** Establishes a "Definition of Done" (DoD) authoritatively without asking unnecessary questions, breaks tasks into vertical slices, and explicitly maps **which skills** will be used.
+2. **Phase 1: Discovery & Specification:** Performs explicit **Customer Journey Mapping (CJM)** to define user flows. Establishes a strict "Definition of Done" (DoD), breaks tasks into vertical slices based on the CJM, and explicitly maps **which skills** will be used.
 3. **Phase 1.5: Spec UAT:** Pauses for upfront plan validation to prevent costly rework. Once approved, the executor does not stop until DoD is met.
 4. **Phase 2: Design Enforcement:** Creates/maintains a strict `DESIGN.md` based on premium references before UI coding begins.
-5. **Phase 3: TDD / Build Loop:** Executes iterative loops of Test-First -> Build -> Verify for each slice. Uses an isolated **Fresh-Context Gatekeeper** to prevent confirmation bias.
+5. **Phase 3: TDD / Build Loop:** Executes iterative loops of Test-First -> Build -> Verify for each slice based on the CJM User Flows. Uses an isolated **Fresh-Context Gatekeeper** to prevent confirmation bias.
 6. **Phase 4: Human Retrospective (UAT):** Pauses to generate a Markdown UAT checklist for the user to verify (UX/UI, scenarios, DoD). Loops back to Phase 3 if rejected.
 7. **Phase 5: Skill Telemetry Contract:** Abandons malware-like "infection" patterns in favor of a clean **Pull Model**. Logs standardized failure metrics that specialized skills can opt-in to parse.
 8. **Phase 6: Kaizen (Micro-Improvement):** Employs a strict **Promotion Gate (≥3 Failures)** to avoid cargo-cult rule accumulation. Appends new rules to `<lessons_learned>` XML blocks safely.
@@ -106,7 +106,7 @@ graph TD
     
     subgraph Engine [The /loop Sovereign Executor]
         P0["🧠 Phase 0: Memory Sync (agents.md)"] --> P1
-        P1["🕵️ Phase 1: Spec, Plan & Skill Map"] --> P1_5
+        P1["🕵️ Phase 1: CJM, Spec, Plan & Skill Map"] --> P1_5
         P1_5{"⚖️ Phase 1.5: Spec UAT"}
         P1_5 -- "❌ Reject" --> P1
         P1_5 -- "✅ Accept" --> P2
