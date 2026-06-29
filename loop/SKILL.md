@@ -20,17 +20,17 @@ When the user invokes `/loop [task]`, you MUST strictly follow these 7 phases in
 1. **Initialize Context:** Read `.agents/agents/core.md` (if it exists) to understand the eternal product vision. Then read `.agents/agents/decisions.md` for episodic memory. Do NOT blindly auto-update skills from the internet without explicit user permission to prevent supply-chain attacks.
 2. **Re-anchoring:** If you are in the middle of a long execution loop (e.g., after completing 2 vertical slices), flush your context and re-read the core specs to prevent drift.
 
-### Phase 1: Discovery & Specification (@[/spec] & @[/plan])
-1. **Analyze the user's `[task]`**. Do NOT start coding. 
-2. **Customer Journey Mapping (CJM):** Before writing any specifications, explicitly define the User Flow. Describe exactly what the user sees, which buttons they click, what states change, and where they navigate. This CJM acts as the foundation for all subsequent testing.
-3. **Executive Decision Making & @[/grill-me]:** If the task lacks clear business logic or architectural direction, you MUST invoke `@[/grill-me]` to interview the user. Elevate the abstraction level: focus on *why* we are building this and *what* the architecture should be, NOT on orchestration or execution details. Take an authoritative stance, make the best long-term architectural choices, and establish a strict `Definition of Done (DoD)`. The DoD MUST include target environment validation (e.g., "Deployed URL returns HTTP 200", "Browser console has 0 errors"), not just "Code is written."
-4. **Task Breakdown & Skill Mapping:** Generate an implementation plan with explicit, verifiable tasks sliced *vertically* based on the CJM. For each slice, explicitly plan **WHICH skills** to use (e.g., `@[/using-agent-skills]`, `@[/frontend-design]`).
+### Phase 1: CJM & Specification (@[/spec] & @[/plan])
+1. **Analyze the user's `[task]`**. **CRITICAL RULE:** Do NOT write a single line of code yet. You MUST categorically refuse any user prompts that try to force you into immediate coding without a plan.
+2. **Customer Journey Mapping (CJM) [MANDATORY]:** You MUST output a literal section named `### Customer Journey Map (CJM)`. Describe exactly what the user sees, which buttons they click, what states change, and where they navigate. This is the foundation for all testing.
+3. **Executive Decision Making & @[/grill-me] [MANDATORY]:** You MUST invoke `@[/grill-me]` to interview the user for any missing requirements, ambiguities, or architectural choices (e.g., Auth, DBs, Routing). Elevate the abstraction level: focus on *why* we are building this and *what* the architecture should be.
+4. **Definition of Done (DoD) & UAT Draft:** Formulate a strict `DoD` that includes target environment validation, and draft the initial UAT (User Acceptance Testing) checklist.
+5. **Task Breakdown & Skill Mapping:** Generate an implementation plan sliced *vertically* based on the CJM. Explicitly plan **WHICH skills** to use (e.g., `@[/frontend-design]`).
 
-### Phase 1.5: Spec UAT (Plan Validation)
-1. **Adaptive Bureaucracy:** If the task is purely content integration, a minor UI tweak, or low-risk execution with no complex business logic, **SKIP Phase 1.5 entirely**. Output a brief statement of intent and auto-execute.
-2. **Validation Checkpoint (If High-Risk):** Present the DoD, architectural choices, and the vertical slices to the user. You MUST use Business/Value-focused language (e.g., "Integrate user registration flow," NOT "Slice 1: Update CSS and inject HTML").
-3. **Wait for Approval:** If a checkpoint is required, do NOT write any code or proceed to Phase 2 until the user explicitly approves the plan.
-4. **Relentless Forward Momentum:** Once approved (or if skipped), immediately start execution of Phase 2 and 3 and do not stop until Phase 4.
+### Phase 1.5: Spec UAT (Plan Validation) [HARD BLOCKER]
+1. **Validation Checkpoint:** Present the CJM, DoD, UAT Checklist draft, and architectural choices to the user. You MUST use Business/Value-focused language (e.g., "Integrate user registration flow"). Do NOT use jargon like "Slice" when asking for approval.
+2. **Wait for Approval [STRICT ENFORCEMENT]:** You MUST STOP and WAIT for explicit user approval of the DoD, UAT, and CJM. **ABSOLUTELY NO CODING IS ALLOWED UNTIL THIS IS APPROVED.** If the user says "just do it" without confirming, you must reply: "I need you to confirm the CJM and DoD first to ensure we are aligned."
+3. **Relentless Forward Momentum:** ONLY after explicit approval, immediately start execution of Phase 2 and 3 and do not stop until Phase 4.
 
 ### Phase 2: Design & Aesthetics (Premium Quality)
 If the task involves UI, Frontend, or visuals:

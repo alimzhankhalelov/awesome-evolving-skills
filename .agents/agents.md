@@ -17,6 +17,7 @@
   - Added Design Phase to search for premium references and enforce a `DESIGN.md` file to prevent broken UI and generic aesthetics.
   - Updated Phase 0 to initialize and manage project memory via `agents.md`.
   - Shifted Phase 3 to require vertical slicing and TDD (Test First, Build, Gatekeeper Verify).
+  - **Phase 1 Tightening:** Enforced strict hard blockers on Phase 1 & 1.5, requiring explicit user approval of CJM, DoD, and UAT before any code is generated.
 
 ## Future Plans
 - Develop more self-improving skills within this open-source repository.
