@@ -23,13 +23,14 @@ When the user invokes `/loop [task]`, you MUST strictly follow these 7 phases in
 ### Phase 1: Discovery & Specification (@[/spec] & @[/plan])
 1. **Analyze the user's `[task]`**. Do NOT start coding. 
 2. **Customer Journey Mapping (CJM):** Before writing any specifications, explicitly define the User Flow. Describe exactly what the user sees, which buttons they click, what states change, and where they navigate. This CJM acts as the foundation for all subsequent testing.
-3. **Executive Decision Making:** Only ask questions if critically blocked or requirements are completely ambiguous. Otherwise, take an authoritative stance, make the best long-term architectural choices, and establish a strict `Definition of Done (DoD)`. The DoD MUST include target environment validation (e.g., "Deployed URL returns HTTP 200", "Browser console has 0 errors"), not just "Code is written."
+3. **Executive Decision Making & @[/grill-me]:** If the task lacks clear business logic or architectural direction, you MUST invoke `@[/grill-me]` to interview the user. Elevate the abstraction level: focus on *why* we are building this and *what* the architecture should be, NOT on orchestration or execution details. Take an authoritative stance, make the best long-term architectural choices, and establish a strict `Definition of Done (DoD)`. The DoD MUST include target environment validation (e.g., "Deployed URL returns HTTP 200", "Browser console has 0 errors"), not just "Code is written."
 4. **Task Breakdown & Skill Mapping:** Generate an implementation plan with explicit, verifiable tasks sliced *vertically* based on the CJM. For each slice, explicitly plan **WHICH skills** to use (e.g., `@[/using-agent-skills]`, `@[/frontend-design]`).
 
 ### Phase 1.5: Spec UAT (Plan Validation)
-1. **Validation Checkpoint:** Present the DoD, architectural choices, and the vertical slices to the user.
-2. **Wait for Approval:** Do NOT write any code or proceed to Phase 2 until the user explicitly approves the plan. This cuts down on costly rework loops.
-3. **Relentless Forward Momentum:** Once the user approves the spec, immediately start execution of Phase 2 and 3 and do not stop until Phase 4.
+1. **Adaptive Bureaucracy:** If the task is purely content integration, a minor UI tweak, or low-risk execution with no complex business logic, **SKIP Phase 1.5 entirely**. Output a brief statement of intent and auto-execute.
+2. **Validation Checkpoint (If High-Risk):** Present the DoD, architectural choices, and the vertical slices to the user. You MUST use Business/Value-focused language (e.g., "Integrate user registration flow," NOT "Slice 1: Update CSS and inject HTML").
+3. **Wait for Approval:** If a checkpoint is required, do NOT write any code or proceed to Phase 2 until the user explicitly approves the plan.
+4. **Relentless Forward Momentum:** Once approved (or if skipped), immediately start execution of Phase 2 and 3 and do not stop until Phase 4.
 
 ### Phase 2: Design & Aesthetics (Premium Quality)
 If the task involves UI, Frontend, or visuals:
